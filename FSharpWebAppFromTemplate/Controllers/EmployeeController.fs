@@ -13,21 +13,11 @@ type EmployeeController() =
 
     [<HttpGet>]
     member this.List() = 
-        //let retVal = EmployeeListViewModel([ EmployeeViewModel(1, "abc"); EmployeeViewModel(2, "def") ]) // //using the let binding so we can add a type annotation. Compiler infers this as List<EmployeeViewModel>, but not sure why it isn't confused by EmployeeModel. Did it choose ViewModel over Model arbitrarily?
-        
-        //this.View(retVal)
-        //ViewResult()
-        let personService = new EmployeeService() //todo: member var with dependency injection
-        this.View(personService.GetPeople())
-        //base.Json(personService.GetPeople())      
+        this.View(CustomMapperService.MapToViewModel([{ Id=1; FirstName="Michael" }; { Id=2; FirstName="Jackson" }]))
 
 
     [<HttpGet>]
     member this.Details() = 
-        //this.View(EmployeeViewModel(1, "abc");
         this.View(CustomMapperService.MapToViewModel({ Id=1; FirstName="Michael" }))
-        
-        //{ Id=1; FirstName="abc" }
-        //)
 
 
