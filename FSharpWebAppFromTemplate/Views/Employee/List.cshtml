@@ -12,13 +12,13 @@
     <title>Employees List</title>
 </head>
 <body>
-    <table>
+    <table style="border: solid 1px black;">
         <tr>
             <th>
                 Id
             </th>
             <th>
-                Name
+                First Name
             </th>
         </tr>
 
@@ -27,8 +27,13 @@
         {
             
             <tr>
-                <td>@curEmployee.Id</td>
-                <td>@curEmployee.FirstName</td>
+                <td>
+                    @Html.ActionLink(curEmployee.Id.ToString(), "Details", "Employee", new { id = curEmployee.Id}, null)
+
+                </td>
+                <td>
+                    @curEmployee.FirstName
+                </td>
             </tr>
             
         }
