@@ -1,0 +1,53 @@
+﻿@model FSharpWebAppFromTemplate.Controllers.Person
+
+
+
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Hello</title>
+    
+</head>
+<body>
+    Hello, @Model.Name
+
+    <br/>
+    <input type="button" id="btnSubmit" value="submit" onclick="btnSubmit_Click()" />
+
+    <br/>
+
+    <div id="divPostResponse">
+
+    </div>
+
+    <script include src="https://code.jquery.com/jquery-3.3.1.js"></script> @*todo: get bundleconfig working*@
+    <script type="text/javascript">
+        $(document).ready(function () {
+            //alert("hello");
+        });
+
+        function btnSubmit_Click() {
+            //debugger;
+            $.post("../PostMethod", function (response) {
+                debugger;
+                //alert(response);
+
+                var responseString = response[0].firstName + ", "
+                responseString += response[1].firstName + ", "
+                responseString += response[2].firstName + ", "
+                responseString += response[3].firstName
+
+                $("#divPostResponse").html(responseString);
+            });
+        }
+
+    </script>
+</body>
+</html>
