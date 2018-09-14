@@ -44,7 +44,7 @@ type HomeController () =
     //[<FromBody>]value:string
     member this.PostMethod() =
         let personService = new EmployeeService() //todo: member var with dependency injection
-        personService.GetPeople()
+        personService.LoadEmployees()
         //base.Json(personService.GetPeople())
         //Json()
         //"post method called"

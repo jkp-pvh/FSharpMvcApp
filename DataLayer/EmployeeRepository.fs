@@ -16,7 +16,7 @@ type EmployeeRepository() =
     
     
     member public this.LoadPeople() =
-        Globals.dbContext.Employees.ToList()
+        Globals.dbContext.Employees.ToArray() |> Array.toList
         //this._dbContext.Employees.Value.ToList()
         //["Joe", "Fred", "Mary", "Sue"]
         //

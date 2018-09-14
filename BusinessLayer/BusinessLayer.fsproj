@@ -8,7 +8,7 @@
     <Compile Include="CustomMapperService.fs" />
     <Compile Include="MapperService2.fs" />
     <Compile Include="MapperService.fs" />
-    <Compile Include="PersonService.fs" />
+    <Compile Include="EmployeeService.fs" />
   </ItemGroup>
 
   <ItemGroup>
