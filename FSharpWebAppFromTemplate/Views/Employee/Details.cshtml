@@ -10,12 +10,29 @@
 <head>
     <meta name="viewport" content="width=device-width" />
     <title>Details</title>
-    HELLO
+
+    <style type="text/css" media="screen">
+        .FieldTitle
+        {
+            font-weight:bold;
+        }
+    </style>
+
+</head>
+<body>
+    <h1>Employee Details</h1>
 
     <br />
 
+    <span class="FieldTitle">Id:</span>
+    &nbsp;&nbsp;
+    @Model.Id
+    <br />
+
+    <span class="FieldTitle">First Name:</span>
+    &nbsp;&nbsp;
     @Model.FirstName
-</head>
-<body>
+    <br />
+
 </body>
 </html>
