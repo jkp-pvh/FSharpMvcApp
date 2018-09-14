@@ -15,12 +15,15 @@ type EmployeeController() =
     member this.List() = 
         //this.View(CustomMapperService.MapToViewModel([{ Id=1; FirstName="Michael" }; { Id=2; FirstName="Jackson" }]))
         let employeeService = EmployeeService()
-        let employees:List<Employee> = employeeService.LoadEmployees()
+        let employees:List<Employee> = employeeService.LoadAllEmployees()
         this.View(CustomMapperService.MapToViewModel(employees))
 
 
     [<HttpGet>]
-    member this.Details() = 
-        this.View(CustomMapperService.MapToViewModel({ Id=1; FirstName="Michael" }))
+    member this.Details(id:int) = 
+        //this.View(CustomMapperService.MapToViewModel({ Id=1; FirstName="Michael" }))
+        let employeeService = EmployeeService() //todo: member var
+        let employee = employeeService.LoadEmployee(id)
+        this.View(CustomMapperService.MapToViewModel(employee))
 
 
