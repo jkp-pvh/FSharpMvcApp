@@ -12,9 +12,28 @@
     <title>Employees List</title>
 </head>
 <body>
+    <table>
+        <tr>
+            <th>
+                Id
+            </th>
+            <th>
+                Name
+            </th>
+        </tr>
 
-    
-    @Model.Employees.Length
-    
+
+        @foreach(var curEmployee in Model.Employees)
+        {
+            
+            <tr>
+                <td>@curEmployee.Id</td>
+                <td>@curEmployee.FirstName</td>
+            </tr>
+            
+        }
+
+    </table>
+
 </body>
 </html>
