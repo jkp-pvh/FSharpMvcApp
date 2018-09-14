@@ -6,12 +6,10 @@
 //open AutoMapper.Configuration
 
 //type MapperService() = 
-//    static let initMapperFunction(cfg:Configuration.MapperConfigurationExpression):IMapperConfigurationExpression = 
-//        cfg.CreateMap<Employee, EmployeeViewModel>() //:?> MapperConfigurationExpression
     
 //    static let initMapper() = 
-//        //Mapper.Initialize(fun cfg:Configuration.MapperConfigurationExpression -> cfg.CreateMap<Employee, EmployeeViewModel>()) |> ignore
-//        Mapper.Initialize(initMapperFunction) 
+//        //MapperConfiguration(fun cfg -> cfg.CreateMap<Employee, EmployeeViewModel>())
+//        0
 
 //    static member val public MapperConfig = initMapper() with get, set //todo: private set
 
@@ -29,3 +27,5 @@
 //    //static member public MapEmployeeToViewModel(employee) =
 //    //    Mapper.Map<EmployeeViewModel>(employee)
     
+
+

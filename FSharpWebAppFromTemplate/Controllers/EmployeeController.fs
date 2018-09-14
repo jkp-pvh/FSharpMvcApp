@@ -24,7 +24,10 @@ type EmployeeController() =
 
     [<HttpGet>]
     member this.Details() = 
-        this.View(EmployeeViewModel(1, "abc");
+        //this.View(EmployeeViewModel(1, "abc");
+        this.View(CustomMapperService.MapToViewModel({ Id=1; FirstName="Michael" }))
         
         //{ Id=1; FirstName="abc" }
-        )
+        //)
+
+

@@ -5,6 +5,8 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Include="CustomMapperService.fs" />
+    <Compile Include="MapperService2.fs" />
     <Compile Include="MapperService.fs" />
     <Compile Include="PersonService.fs" />
   </ItemGroup>
@@ -15,6 +17,8 @@
 
   <ItemGroup>
     <ProjectReference Include="..\DataLayer\DataLayer.fsproj" />
+    <ProjectReference Include="..\Model\Model.fsproj" />
+    <ProjectReference Include="..\ViewModel\ViewModel.fsproj" />
   </ItemGroup>
 
 </Project>
