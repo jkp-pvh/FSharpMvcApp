@@ -26,4 +26,7 @@ type EmployeeController() =
         let employee = employeeService.LoadEmployee(id)
         this.View(CustomMapperService.MapToViewModel(employee))
 
-
+    [<HttpGet>]
+    member this.LoadCompensationTypes() = 
+        let employeeService = EmployeeService() 
+        employeeService.LoadAllCompensationTypes()

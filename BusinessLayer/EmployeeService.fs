@@ -10,3 +10,7 @@ type EmployeeService() =
     member public this.LoadAllEmployees() =
         let personRepository = new EmployeeRepository() //todo: move this to a member var
         personRepository.LoadAllEmployees()
+
+    member public this.LoadAllCompensationTypes() = 
+        let employeeRepo = new EmployeeRepository()
+        employeeRepo.LoadAllCompensationTypes()
