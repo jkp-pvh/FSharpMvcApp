@@ -32,6 +32,25 @@
     <span class="FieldTitle">First Name:</span>
     @Model.FirstName
     <br />
+    <br />
+
+    <h2>Compensations</h2>
+
+    @Model.Compensations.Count
+
+    @Model.Compensations.ElementAt(0).CompensationType.Name
+    @*
+    @foreach(var curCompensation in Model.Compensations)
+    {
+    <span class="FieldTitle">Type:</span>
+    curCompensation.Type
+    <br />
+
+    <span class="FieldTitle">Amount:</span>
+    curCompensation.ValueWithUnits
+    <br />
+    }
+    *@
 
 </body>
 </html>

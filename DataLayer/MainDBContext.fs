@@ -21,6 +21,15 @@ type MainDbContext(options) =
         with get() = x.compensationTypes
         and set v = x.compensationTypes <- v
 
+
+    [<DefaultValue>]
+    val mutable employeeCompensations:DbSet<CompensationType>
+
+    member x.EmployeeCompensations
+        with get() = x.employeeCompensations
+        and set v = x.compensationTypes <- v
+
+
     override this.OnConfiguring(optionsBuilder) =
         optionsBuilder.UseSqlServer("Data Source=(localdb)\FSharpWebAppDB;Initial Catalog=MainDB;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False") |> ignore
 

@@ -21,7 +21,7 @@ and [<Table("EmployeeCompensation")>]
     
     [<ForeignKey("CompensationType")>]
     CompensationTypeId:int;
-    CompensationType:CompensationType
+    mutable CompensationType:CompensationType
 }
 
 
