@@ -37,20 +37,26 @@
     <h2>Compensations</h2>
 
     @Model.Compensations.Count
+    <br />
+    @Model.Compensations[0].UnitsPre
+    <br />
+    @Model.Compensations[0].Value
+    <br />
+    @Model.Compensations[0].UnitsPost
+    <br />
+    @Model.Compensations[0].Type
 
-    @Model.Compensations.ElementAt(0).CompensationType.Name
-    @*
-    @foreach(var curCompensation in Model.Compensations)
+    <hr />
+    
+    @foreach(var curCompensation in @Model.Compensations)
     {
-    <span class="FieldTitle">Type:</span>
-    curCompensation.Type
-    <br />
-
-    <span class="FieldTitle">Amount:</span>
-    curCompensation.ValueWithUnits
-    <br />
+        <span class="FieldTitle">Type:</span>
+        @curCompensation.Type
+        <br/>
     }
-    *@
+   
+
+
 
 </body>
 </html>
