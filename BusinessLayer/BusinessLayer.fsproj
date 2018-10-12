@@ -5,6 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Include="PredictedCompensationViewModel.fs" />
     <Compile Include="CustomMapperService.fs" />
     <Compile Include="MapperService2.fs" />
     <Compile Include="MapperService.fs" />

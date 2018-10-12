@@ -1,22 +1,34 @@
 namespace BusinessLayer
 
 open DataLayer
+open System.Linq
+open Model
+open Common
 
-type PredictedCompensations(multipliers:int[], baseValue:int) = 
-    member val public Multipliers = multipliers with get
-    member val public BaseValue = baseValue with get
-    member val public ComputedValues = None
 
 type EmployeeService() =
     let GenerateMultiplier min increment index = 
-        min + (increment * index)
+        min + (increment * (decimal)index)
 
     member public this.LoadEmployee(id) = 
         let personRepository = new EmployeeRepository() //todo: move this to a member var
-        let temp = this.GenerateMultipliers(0, 100, 5)
-        personRepository.LoadEmployee(id)
-        //let retVal = personRepository.LoadEmployee(id)
-        //retVal.Compensations = 
+        let retVal = personRepository.LoadEmployee(id)
+        
+        let fsCompensations = List.ofSeq retVal.Compensations //need to convert from System.Collections.Generic.List to F# list
+        let predictions = fsCompensations |> List.map(fun c -> this.GeneratePredictedCompensation(c))
+        
+        retVal
+
+    member public this.LoadEmployeeWithPredictions(id) =
+        let personRepository = new EmployeeRepository() //todo: move this to a member var
+        let retVal = personRepository.LoadEmployee(id)
+        
+        let fsCompensations = List.ofSeq retVal.Compensations //need to convert from System.Collections.Generic.List to F# list
+        let predictions = fsCompensations |> List.map(fun c -> this.GeneratePredictedCompensation(c))
+        
+
+
+        retVal
 
     member public this.LoadAllEmployees() =
         let personRepository = new EmployeeRepository() //todo: move this to a member var
@@ -26,11 +38,30 @@ type EmployeeService() =
         let employeeRepo = new EmployeeRepository()
         employeeRepo.LoadAllCompensationTypes()
 
-    member private this.GenerateMultipliers(min:int, max:int, steps:int) = 
-        let increment = (float)(max - min) / ((float) (steps-1))
-        let multiplierFunc = GenerateMultiplier min  ((int)increment)
-        let retVal = List.init steps multiplierFunc
+    member private this.GenerateMultipliers(min:decimal, max:decimal, steps:int) = 
+        let increment = (decimal)(max - min) / ((decimal) (steps-1))
+        let multiplierFunc = GenerateMultiplier min  increment 
+        let retVal = Array.init steps multiplierFunc
         retVal;
+
+    member private this.GeneratePredictedCompensation(compensation) = 
+        let compensationType = enum<CompensationTypeEnum>(compensation.CompensationTypeId);
+
+        let (min, max) = match compensationType with
+                            | CompensationTypeEnum.Bonus -> (0m, 1m)
+                            | CompensationTypeEnum.Hourly -> (30m, 50m)
+                            | CompensationTypeEnum.Commission -> (0m, 100000m)
+                            | CompensationTypeEnum.Salary -> (1m, 1m)
+
+        let multipliers = this.GenerateMultipliers(min, max, Constants.NumPredictions)
+
+        let baseCompensationValue = match compensationType with 
+                        | CompensationTypeEnum.Commission -> (decimal)compensation.Value / 100m //todo: maybe Compensation.Value should have been decimal in the DB
+                        | _ -> (decimal)compensation.Value
+
+        let computedValues = multipliers |> Array.map (fun (x:decimal) -> x * baseCompensationValue)
+
+        PredictedCompensation(multipliers, computedValues, compensationType.ToString())
 
     (*
     The fact that F# is both OO and functional makes it EXTREMELY difficult to learn.
@@ -39,4 +70,6 @@ type EmployeeService() =
     Confusion between F#'s List type and System.Collections.Generic.List<T>
 
     F#'s type inference is TERRIBLE. I've had to specify type almost everywhere
+
+    F# documentation seems not as good as the rest of MS's documentation, more like Oracle or Java. Only gives trivial examples
     *)
