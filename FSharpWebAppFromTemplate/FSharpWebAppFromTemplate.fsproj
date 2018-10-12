@@ -5,11 +5,14 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Content Include="Styles\Styles.css" />
     <Compile Include="Controllers\HomeController.fs" />
     <Compile Include="Controllers\EmployeeController.fs" />
     <Compile Include="Startup.fs" />
     <Compile Include="Program.fs" />
   </ItemGroup>
+
+  <ItemGroup />
 
   <ItemGroup>
     <None Include="jquery-3.3.1.js" />

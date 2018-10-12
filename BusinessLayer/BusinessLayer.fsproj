@@ -16,6 +16,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Common\Common.fsproj" />
     <ProjectReference Include="..\DataLayer\DataLayer.fsproj" />
     <ProjectReference Include="..\Model\Model.fsproj" />
     <ProjectReference Include="..\ViewModel\ViewModel.fsproj" />
