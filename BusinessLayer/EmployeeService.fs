@@ -53,13 +53,15 @@ type EmployeeService() =
 
         let multipliers = this.GenerateMultipliers(min, max, Constants.NumPredictions)
         let multipliersIdentity = this.GenerateMultipliers(1.0m, 1.0m, Constants.NumPredictions)
+        let multipliersHourly = multipliers |> Array.map(fun curMultiplier -> curMultiplier * 52.0m)
 
         let baseCompensationValue = match compensationType with 
                         | CompensationTypeEnum.Commission -> (decimal)compensation.Value / 100m //todo: maybe Compensation.Value should have been decimal in the DB
                         | _ -> (decimal)compensation.Value
 
         let computedValues = match compensationType with 
-                                | CompensationTypeEnum.Salary -> multipliersIdentity |> Array.map (fun (x:decimal) -> x * baseCompensationValue)
+                                | CompensationTypeEnum.Salary -> multipliersIdentity |> Array.map(fun (x:decimal) -> x * baseCompensationValue)
+                                | CompensationTypeEnum.Hourly -> multipliersHourly |> Array.map(fun (x:decimal) -> x * baseCompensationValue)
                                 | _ -> multipliers |> Array.map (fun (x:decimal) -> x * baseCompensationValue)
         
         PredictedCompensation(multipliers, computedValues, compensationType.ToString())
