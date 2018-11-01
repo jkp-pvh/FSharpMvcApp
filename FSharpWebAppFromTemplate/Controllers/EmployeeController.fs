@@ -31,9 +31,12 @@ type EmployeeController() =
     [<HttpGet>]
     member this.DetailsWithPrediction(id:int) = 
         let employeeService = EmployeeService() //todo: member var
-        let viewModelWithPredictions = employeeService.LoadEmployeeWithPredictions(id)
+        let modelWithPredictions = employeeService.LoadEmployeeWithPredictions(id)
         
-        this.View(viewModelWithPredictions)
+        let viewModel = CustomMapperService.MapToViewModel(modelWithPredictions)
+
+        this.View(viewModel)
+
 
         
 

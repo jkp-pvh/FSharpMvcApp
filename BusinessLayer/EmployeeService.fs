@@ -25,10 +25,8 @@ type EmployeeService() =
         
         let fsCompensations = List.ofSeq retVal.Compensations //need to convert from System.Collections.Generic.List to F# list
         let predictions = fsCompensations |> List.map(fun c -> this.GeneratePredictedCompensation(c))
-        
 
-
-        retVal
+        (retVal, predictions)
 
     member public this.LoadAllEmployees() =
         let personRepository = new EmployeeRepository() //todo: move this to a member var

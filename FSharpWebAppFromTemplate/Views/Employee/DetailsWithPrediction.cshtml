@@ -1,0 +1,119 @@
+﻿@model FSharpWebAppFromTemplate.ViewModel.EmployeeViewModel
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Details</title>
+
+    <style type="text/css" media="screen">
+        .FieldTitle {
+            font-weight: bold;
+            padding-right: 5px;
+        }
+
+        table {
+            border-collapse: collapse;
+            border: solid 1px black;
+            text-align: center;
+            vertical-align: middle;
+            padding: 3px;
+        }
+
+        table td {
+            border: solid 1px black;
+            text-align: center;
+            vertical-align: middle;
+            padding: 3px;
+        }
+
+        table th {
+            border: solid 1px black;
+            text-align: center;
+            vertical-align: middle;
+            padding: 3px;
+        }
+    </style>
+
+
+
+    @*todo: get css include file working*@
+
+</head>
+<body>
+    <h1>Employee Details</h1>
+
+    <br />
+
+    <span class="FieldTitle">Id:</span>
+    @Model.Id
+    <br />
+
+    <span class="FieldTitle">First Name:</span>
+    @Model.FirstName
+    <br />
+    <br />
+
+    <h2>Compensations</h2>
+
+    <div style="margin-left:20px;">
+        @foreach(var curCompensation in @Model.Compensations)
+        {
+            @curCompensation.Type
+            @: - &nbsp;&nbsp;
+            @curCompensation.UnitsPre
+            @curCompensation.Value
+            @curCompensation.UnitsPost
+
+            @: <br />
+        }
+    </div>
+
+    <h2>Predicted Compensations</h2>
+
+    <div style="margin-left:20px;">
+
+
+
+        @foreach(var curPrediction in @Model.PredictedCompensations)
+        {
+            <div style="float:left; margin-top:3px;">
+                @curPrediction.Label
+            </div>
+            <div style="float:left; margin-left:5px;">
+                <table>
+                    <thead>
+                        @foreach(var curHeader in curPrediction.Headers)
+                        {
+                            <th>
+                                @curHeader
+                            </th>
+                        }
+                    </thead>
+                    <tbody>
+                        <tr>
+                            @foreach(var curValue in curPrediction.Values)
+                            {
+                                <td>
+                                    @curValue
+                                </td>
+                            }
+                        </tr>
+                    </tbody>
+
+                </table>
+            </div>
+        }
+
+
+
+
+    </div>
+
+</body>
+</html>
