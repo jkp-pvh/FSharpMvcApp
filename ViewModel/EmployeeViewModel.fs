@@ -30,8 +30,8 @@ and EmployeeCompensationViewModel(value:int, compensationType:string) =
             | "Hourly" -> " per hour"
             | "Commission" -> "%"
 
-and PredictedCompensationViewModel(label:string) =
+and PredictedCompensationViewModel(label:string, headers:string[], values:string[]) =
     member val public Label = label with get, set
-    member val public Headers = Array.create 5 "a" with get
-    member val public Values = Array.create 5 "b" with get
+    member val public Headers = headers //Array.create 5 "a" with get
+    member val public Values = values //Array.create 5 "b" with get
 

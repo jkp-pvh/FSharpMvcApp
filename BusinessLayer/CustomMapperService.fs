@@ -13,12 +13,14 @@ type CustomMapperService() =
         //let compensationViewModels = employee.Compensations.Select(fun c -> MapToViewModel(c)).ToList()
         let compensationViewModels = employee.Compensations.Select(fun c -> EmployeeCompensationViewModel(c.Value, c.CompensationType.Name)).ToList()
         let predictedCompensationViewModels = System.Collections.Generic.List<PredictedCompensationViewModel>()
-        predictedCompensationViewModels.Add(PredictedCompensationViewModel("Predicted"))
+        //predictedCompensationViewModels.Add(PredictedCompensationViewModel("Predicted"))
         EmployeeViewModel(employee.Id, employee.FirstName, compensationViewModels, predictedCompensationViewModels)
 
 
     static member public MapToViewModel(predictedCompensation:PredictedCompensation) =
-        PredictedCompensationViewModel(predictedCompensation.CompensationTypeName)
+        let multipliersAsStrings = predictedCompensation.Multipliers |> Array.map(fun curMultiplier -> curMultiplier.ToString())
+        let valuesAsStrings = predictedCompensation.ComputedValues |> Array.map(fun curValue -> curValue.ToString())
+        PredictedCompensationViewModel(predictedCompensation.CompensationTypeName, multipliersAsStrings, valuesAsStrings)
     
     static member public MapToViewModel(predictedCompensations:List<PredictedCompensation>) =
         predictedCompensations |> List.map(fun curPredictedCompensation -> CustomMapperService.MapToViewModel(curPredictedCompensation))

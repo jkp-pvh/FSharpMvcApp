@@ -82,7 +82,7 @@
 
         @foreach(var curPrediction in @Model.PredictedCompensations)
         {
-            <div style="float:left; margin-top:3px;">
+            <div style="float:left; clear:left; margin-top:3px;">
                 @curPrediction.Label
             </div>
             <div style="float:left; margin-left:5px;">
@@ -90,24 +90,27 @@
                     <thead>
                         @foreach(var curHeader in curPrediction.Headers)
                         {
-                            <th>
-                                @curHeader
-                            </th>
-                        }
+                    <th>
+                        @curHeader
+                    </th>
+                    }
                     </thead>
                     <tbody>
                         <tr>
                             @foreach(var curValue in curPrediction.Values)
                             {
-                                <td>
-                                    @curValue
-                                </td>
+                            <td>
+                                @curValue
+                            </td>
                             }
                         </tr>
                     </tbody>
 
                 </table>
+                <br />
+                <br />
             </div>
+            
         }
 
 
