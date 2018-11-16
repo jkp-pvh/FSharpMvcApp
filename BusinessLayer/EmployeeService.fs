@@ -21,12 +21,12 @@ type EmployeeService() =
 
     member public this.LoadEmployeeWithPredictions(id) =
         let personRepository = new EmployeeRepository() //todo: move this to a member var
-        let retVal = personRepository.LoadEmployee(id)
+        let employee = personRepository.LoadEmployee(id)
         
-        let fsCompensations = List.ofSeq retVal.Compensations //need to convert from System.Collections.Generic.List to F# list
+        let fsCompensations = List.ofSeq employee.Compensations //need to convert from System.Collections.Generic.List to F# list
         let predictions = fsCompensations |> List.map(fun c -> this.GeneratePredictedCompensation(c))
 
-        (retVal, predictions)
+        (employee, predictions)
 
     member public this.LoadAllEmployees() =
         let personRepository = new EmployeeRepository() //todo: move this to a member var
@@ -65,14 +65,3 @@ type EmployeeService() =
                                 | _ -> multipliers |> Array.map (fun (x:decimal) -> x * baseCompensationValue)
         
         PredictedCompensation(multipliers, computedValues, compensationType.ToString())
-
-    (*
-    The fact that F# is both OO and functional makes it EXTREMELY difficult to learn.
-        example: what is the difference between methods and let bindings? How do you know when to use each? Seems like you can't use currying on methods - now I have to convert my method to a let binding
-
-    Confusion between F#'s List type and System.Collections.Generic.List<T>
-
-    F#'s type inference is TERRIBLE. I've had to specify type almost everywhere
-
-    F# documentation seems not as good as the rest of MS's documentation, more like Oracle or Java. Only gives trivial examples
-    *)
