@@ -11,27 +11,24 @@ open FSharpWebAppFromTemplate.ViewModel
 type EmployeeController() = 
     inherit Controller()
 
+    let _employeeService = EmployeeService()
+
     [<HttpGet>]
     member this.List() = 
-        //this.View(CustomMapperService.MapToViewModel([{ Id=1; FirstName="Michael" }; { Id=2; FirstName="Jackson" }]))
-        let employeeService = EmployeeService()
-        let employees:List<Employee> = employeeService.LoadAllEmployees()
+        let employees:List<Employee> = _employeeService.LoadAllEmployees()
         this.View(CustomMapperService.MapToViewModel(employees))
 
 
     [<HttpGet>]
     member this.Details(id:int) = 
-        //this.View(CustomMapperService.MapToViewModel({ Id=1; FirstName="Michael" }))
-        let employeeService = EmployeeService() //todo: member var
-        let employee = employeeService.LoadEmployee(id)
+        let employee = _employeeService.LoadEmployee(id)
         
         let viewModel = CustomMapperService.MapToViewModel(employee) //todo: mapping should be done in business layer!
         this.View(viewModel)
         
     [<HttpGet>]
     member this.DetailsWithPrediction(id:int) = 
-        let employeeService = EmployeeService() //todo: member var
-        let modelWithPredictions = employeeService.LoadEmployeeWithPredictions(id)
+        let modelWithPredictions = _employeeService.LoadEmployeeWithPredictions(id)
         
         let viewModel = CustomMapperService.MapToViewModel(modelWithPredictions)
 
@@ -42,5 +39,4 @@ type EmployeeController() =
 
     [<HttpGet>]
     member this.LoadCompensationTypes() = 
-        let employeeService = EmployeeService() 
-        employeeService.LoadAllCompensationTypes()
+        _employeeService.LoadAllCompensationTypes()

@@ -10,6 +10,8 @@ type EmployeeService() =
     let GenerateMultiplier min increment index = 
         min + (increment * (decimal)index)
 
+    let _employeeRepository = new EmployeeRepository()
+
     member public this.LoadEmployee(id) = 
         let personRepository = new EmployeeRepository() //todo: move this to a member var
         let retVal = personRepository.LoadEmployee(id)
@@ -20,8 +22,7 @@ type EmployeeService() =
         retVal
 
     member public this.LoadEmployeeWithPredictions(id) =
-        let personRepository = new EmployeeRepository() //todo: move this to a member var
-        let employee = personRepository.LoadEmployee(id)
+        let employee = _employeeRepository.LoadEmployee(id)
         
         let fsCompensations = List.ofSeq employee.Compensations //need to convert from System.Collections.Generic.List to F# list
         let predictions = fsCompensations |> List.map(fun c -> this.GeneratePredictedCompensation(c))
@@ -29,12 +30,10 @@ type EmployeeService() =
         (employee, predictions)
 
     member public this.LoadAllEmployees() =
-        let personRepository = new EmployeeRepository() //todo: move this to a member var
-        personRepository.LoadAllEmployees()
+        _employeeRepository.LoadAllEmployees()
 
     member public this.LoadAllCompensationTypes() = 
-        let employeeRepo = new EmployeeRepository()
-        employeeRepo.LoadAllCompensationTypes()
+        _employeeRepository.LoadAllCompensationTypes()
 
     member private this.GenerateMultipliers(min:decimal, max:decimal, steps:int) = 
         let increment = (decimal)(max - min) / ((decimal) (steps-1))

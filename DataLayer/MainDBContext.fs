@@ -23,11 +23,11 @@ type MainDbContext(options) =
 
 
     [<DefaultValue>]
-    val mutable employeeCompensations:DbSet<CompensationType>
+    val mutable employeeCompensations:DbSet<EmployeeCompensation>
 
     member x.EmployeeCompensations
         with get() = x.employeeCompensations
-        and set v = x.compensationTypes <- v
+        and set v = x.employeeCompensations <- v
 
 
     override this.OnConfiguring(optionsBuilder) =
