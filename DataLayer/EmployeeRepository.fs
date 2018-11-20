@@ -25,12 +25,10 @@ type EmployeeRepository() =
         let compensations = Globals.dbContext.EmployeeCompensations.Include(fun ec -> ec.CompensationType);
         let employees = Globals.dbContext.Employees.Where(fun e -> e.Id = id) 
 
-        //employees.GroupJoin(compensations, (fun e -> e.Id), (fun c -> c.EmployeeId), fun x-> {Id=1; FirstName=x.ToString(); Compensations=compensations})
-
-        //Globals.dbContext.Employees.GroupJoin(Globals.dbContext.EmployeeCompensations, fun e -> e.Compensations
-        0
-
-    
+        employees.GroupJoin(compensations, 
+                            (fun e -> e.Id), 
+                            (fun c -> c.EmployeeId), 
+                            fun e c -> { Id = e.Id; FirstName = e.FirstName; Compensations = c.ToList() }).Single()
     
     member public this.LoadAllEmployees() =
         Globals.dbContext.Employees.ToArray() |> Array.toList

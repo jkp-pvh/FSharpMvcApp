@@ -22,7 +22,7 @@ type EmployeeService() =
         retVal
 
     member public this.LoadEmployeeWithPredictions(id) =
-        let employee = _employeeRepository.LoadEmployee(id)
+        let employee = _employeeRepository.LoadEmployeeGroupJoin(id)
         
         let fsCompensations = List.ofSeq employee.Compensations //need to convert from System.Collections.Generic.List to F# list
         let predictions = fsCompensations |> List.map(fun c -> this.GeneratePredictedCompensation(c))
