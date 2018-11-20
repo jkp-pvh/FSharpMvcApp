@@ -12,14 +12,14 @@ type EmployeeService() =
 
     let _employeeRepository = new EmployeeRepository()
 
-    member public this.LoadEmployee(id) = 
-        let personRepository = new EmployeeRepository() //todo: move this to a member var
-        let retVal = personRepository.LoadEmployee(id)
+    //member public this.LoadEmployee(id) = 
+    //    let personRepository = new EmployeeRepository() //todo: move this to a member var
+    //    let retVal = personRepository.LoadEmployee(id)
         
-        let fsCompensations = List.ofSeq retVal.Compensations //need to convert from System.Collections.Generic.List to F# list
-        let predictions = fsCompensations |> List.map(fun c -> this.GeneratePredictedCompensation(c))
+    //    let fsCompensations = List.ofSeq retVal.Compensations //need to convert from System.Collections.Generic.List to F# list
+    //    let predictions = fsCompensations |> List.map(fun c -> this.GeneratePredictedCompensation(c))
         
-        retVal
+    //    retVal
 
     member public this.LoadEmployeeWithPredictions(id) =
         let employee = _employeeRepository.LoadEmployeeGroupJoin(id)

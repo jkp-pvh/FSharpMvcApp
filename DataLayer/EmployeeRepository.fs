@@ -7,19 +7,19 @@ open Model
 type EmployeeRepository() =
 
     
-    member private this.AssignCompensationType(compensation, types:DbSet<CompensationType>) =
-        compensation.CompensationType <- types.Single(fun t -> t.Id = compensation.CompensationTypeId)
+    //member private this.AssignCompensationType(compensation, types:DbSet<CompensationType>) =
+    //    compensation.CompensationType <- types.Single(fun t -> t.Id = compensation.CompensationTypeId)
     
-    member private this.AssignCompensationTypes(employee) = 
-        employee.Compensations.ForEach(fun c -> this.AssignCompensationType(c, Globals.dbContext.CompensationTypes))
-        //employee.Compensations |> List.map(fun c -> this.AssignCompensationType(c, Globals.dbContext.CompensationTypes))
+    //member private this.AssignCompensationTypes(employee) = 
+    //    employee.Compensations.ForEach(fun c -> this.AssignCompensationType(c, Globals.dbContext.CompensationTypes))
+    //    //employee.Compensations |> List.map(fun c -> this.AssignCompensationType(c, Globals.dbContext.CompensationTypes))
     
-    member public this.LoadEmployee(id) = 
-        //todo: group join
-        let employees = Globals.dbContext.Employees.Include(fun e -> e.Compensations).Where(fun e -> e.Id = id) //todo: ThenInclude(fun c -> c.Compensations). If I try to do this, the param "c" is of type List<EmployeeCompensation> instead of EmployeeCompensation
-        let compensationTypes = Globals.dbContext.CompensationTypes
-        let foo = employees.ToList().ForEach(fun e -> this.AssignCompensationTypes(e))
-        employees.Single()
+    //member public this.LoadEmployee(id) = 
+    //    //todo: group join
+    //    let employees = Globals.dbContext.Employees.Include(fun e -> e.Compensations).Where(fun e -> e.Id = id) //todo: ThenInclude(fun c -> c.Compensations). If I try to do this, the param "c" is of type List<EmployeeCompensation> instead of EmployeeCompensation
+    //    let compensationTypes = Globals.dbContext.CompensationTypes
+    //    let foo = employees.ToList().ForEach(fun e -> this.AssignCompensationTypes(e))
+    //    employees.Single()
 
     member public this.LoadEmployeeGroupJoin(id) = 
         let compensations = Globals.dbContext.EmployeeCompensations.Include(fun ec -> ec.CompensationType);

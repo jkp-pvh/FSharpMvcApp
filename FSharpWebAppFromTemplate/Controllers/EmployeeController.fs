@@ -19,12 +19,12 @@ type EmployeeController() =
         this.View(CustomMapperService.MapToViewModel(employees))
 
 
-    [<HttpGet>]
-    member this.Details(id:int) = 
-        let employee = _employeeService.LoadEmployee(id)
+    //[<HttpGet>]
+    //member this.Details(id:int) = 
+    //    let employee = _employeeService.LoadEmployee(id)
         
-        let viewModel = CustomMapperService.MapToViewModel(employee) //todo: mapping should be done in business layer!
-        this.View(viewModel)
+    //    let viewModel = CustomMapperService.MapToViewModel(employee) //todo: mapping should be done in business layer!
+    //    this.View(viewModel)
         
     [<HttpGet>]
     member this.DetailsWithPrediction(id:int) = 
