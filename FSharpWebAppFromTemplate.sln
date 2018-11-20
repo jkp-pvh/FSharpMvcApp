@@ -15,6 +15,10 @@ Project("{6EC3EE1D-3C4E-46DD-8F32-0CC8E7565705}") = "ViewModel", "ViewModel\View
 EndProject
 Project("{6EC3EE1D-3C4E-46DD-8F32-0CC8E7565705}") = "Common", "Common\Common.fsproj", "{83F5D96D-8B73-46A0-9437-845C8E6F3D84}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BusinessLayerCSharp", "BusinessLayerCSharp\BusinessLayerCSharp.csproj", "{6388E851-8531-456F-97E4-4C74B9E71FEB}"
+EndProject
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "BusinessObjects", "BusinessClasses\BusinessObjects.fsproj", "{C692CD26-D19C-4F65-BFBE-894F9B859E6A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -45,6 +49,14 @@ Global
 		{83F5D96D-8B73-46A0-9437-845C8E6F3D84}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{83F5D96D-8B73-46A0-9437-845C8E6F3D84}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{83F5D96D-8B73-46A0-9437-845C8E6F3D84}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6388E851-8531-456F-97E4-4C74B9E71FEB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6388E851-8531-456F-97E4-4C74B9E71FEB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6388E851-8531-456F-97E4-4C74B9E71FEB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6388E851-8531-456F-97E4-4C74B9E71FEB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C692CD26-D19C-4F65-BFBE-894F9B859E6A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C692CD26-D19C-4F65-BFBE-894F9B859E6A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C692CD26-D19C-4F65-BFBE-894F9B859E6A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C692CD26-D19C-4F65-BFBE-894F9B859E6A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

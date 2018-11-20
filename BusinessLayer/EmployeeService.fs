@@ -4,7 +4,7 @@ open DataLayer
 open System.Linq
 open Model
 open Common
-
+open BusinessLayerCSharp
 
 type EmployeeService() =
     let GenerateMultiplier min increment index = 
@@ -25,7 +25,12 @@ type EmployeeService() =
         let employee = _employeeRepository.LoadEmployeeGroupJoin(id)
         
         let fsCompensations = List.ofSeq employee.Compensations //need to convert from System.Collections.Generic.List to F# list
+        
+        
         let predictions = fsCompensations |> List.map(fun c -> this.GeneratePredictedCompensation(c))
+        
+        //let predictionSvc = new CompensationPredictionService()
+        //let predictions = fsCompensations |> List.map(fun c -> predictionSvc.GetPredictedCompensation(c)) 
 
         (employee, predictions)
 
